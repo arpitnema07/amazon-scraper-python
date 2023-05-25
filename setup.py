@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
-try:  # Pour pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError:  # For pip <= 9
-    from pip.req import parse_requirements
-
-# Based on http://peterdowns.com/posts/first-time-with-pypi.html
+from pip._internal.req import parse_requirements
 
 __version__ = '0.1.2'  # Should match with __init.py__
 _NOM_PACKAGE = 'amazonscraper'
@@ -19,10 +14,7 @@ _SCRIPTS = ['amazon2csv.py']
 # if no command is used in the package
 
 install_reqs = parse_requirements('requirements.txt', session='hack')
-try:
-    requirements = [str(ir.req) for ir in install_reqs]
-except:
-    requirements = [str(ir.requirement) for ir in install_reqs]
+requirements = [str(ir.requirement) for ir in install_reqs]
 
 setup(
     name=_NOM_PACKAGE,
